@@ -1,5 +1,5 @@
 import player from '../../api/PlayerAPI';
-import { errorAction } from './ajaxActions';
+import { errorAction, successAction } from './ajaxActions';
 import { LOGGED_IN_PLAYER } from './actionTypes';
 
 export function registerPlayerAction(payload) {
@@ -7,10 +7,13 @@ export function registerPlayerAction(payload) {
         return player.register(payload)
             .then(response => {
                 localStorage.setItem('username', response.data.username);
+                dispatch(successAction());
                 dispatch(loggedInPlayerAction());
             })
             .catch(error => {
-                dispatch(errorAction());
+                const message = error.response.data.message;
+
+                dispatch(errorAction(message));
             });
     }
 }
