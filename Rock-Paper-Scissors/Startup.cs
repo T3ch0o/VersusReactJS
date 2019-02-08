@@ -1,28 +1,37 @@
 namespace Rock_Paper_Scissors
 {
+    using Data;
+    using Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Services;
+    using Services.Interfaces;
 
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddDbContext<RockPaperScissorsDbContext>(options =>
+                options.UseNpgsql(_configuration["Data:RockPaperScissors:ConnectionString"]));
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddScoped<IPlayerService, PlayerService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
