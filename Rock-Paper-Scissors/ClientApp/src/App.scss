@@ -2,24 +2,33 @@ $background: #f5f6fa;
 $text: #9c9c9c;
 $input-bg-color: #fff;
 $input-text-color: #a3a3a3;
+$input-border-color: #2c2c2c;
 $button-bg-color: #4e0087;
 $button-text-color: #fff;
 
 .intro {
   max-width: 1600px;
   margin: auto;
-  padding: 20px;
+  padding: 160px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
 
   .logo > img {
-    width: 220px;
+    width: 400px;
     margin-bottom: 20px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 1;
+    transform: translate(-50%);
   }
 
   .player-form {
+    position: relative;
+    z-index: 2;
+
     .player-username {
       width: 360px;
       background: #fff;
@@ -27,6 +36,7 @@ $button-text-color: #fff;
       font: inherit;
       box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
       border: 0;
+      border-radius: 2px;
       outline: 0;
       padding: 22px 18px;
     }
