@@ -32,6 +32,14 @@ namespace Rock_Paper_Scissors
             });
 
             services.AddScoped<IPlayerService, PlayerService>();
+
+            services.AddMvc(options =>
+                options.Filters.Add(typeof(ValidateModelStateAttribute)));
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
