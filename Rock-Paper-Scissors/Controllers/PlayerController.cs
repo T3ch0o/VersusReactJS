@@ -1,6 +1,7 @@
 ﻿namespace Rock_Paper_Scissors.Controllers
 {
-    using BindingModel;
+    using BindingModels;
+    using Filters;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Services.Interfaces;
@@ -15,13 +16,24 @@
         }
 
         [HttpPost("register")]
+        [ValidateModelState]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Register([FromBody] PlayerBindingModel player)
         {
-            _playerService.RegisterPlayer(player.Username);
+            string ipAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
-            return Ok(player);
+            bool isRegistered = _playerService.RegisterPlayer(player.Username, ipAddress);
+
+            if (isRegistered)
+            {
+                return Ok(player);
+            }
+
+            return BadRequest(new
+            {
+                message = "Username already exists."
+            });
         }
     }
 }
