@@ -12,8 +12,9 @@ export function successAction() {
     };
 }
 
-export function errorAction() {
+export function errorAction(message) {
     return {
-        type: AJAX_ERROR
+        type: AJAX_ERROR,
+        message
     };
 }
