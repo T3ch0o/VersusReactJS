@@ -29,6 +29,13 @@ $button-text-color: #fff;
     position: relative;
     z-index: 2;
 
+    .form-error {
+      display: block;
+      color: #ff1e1a;
+      text-align: center;
+      margin-bottom: 2px;
+    }
+
     .player-username {
       width: 360px;
       background: #fff;
