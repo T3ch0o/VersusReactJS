@@ -5,4 +5,5 @@ import reducers from './reducers';
 function configureStore() {
     return createStore(combineReducers(reducers), applyMiddleware(thunk));
 }
+
 export default configureStore;
