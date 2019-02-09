@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Fade from 'react-reveal/Fade';
 import logo from '../../assets/images/logo.svg';
 import dataCollector from '../../utils/dataCollector';
+
+// Store
 import { logoutPlayerAction, registerPlayerAction } from '../../store/actions/playerActions';
 import { connect } from 'react-redux';
-import Fade from 'react-reveal/Fade'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -40,7 +42,7 @@ class Header extends Component {
 
                 <Fade top when={!loggedIn}>
                     {!loggedIn && <form className="player-form" onSubmit={this.onSubmitHandler}>
-                        <input name="username" type="text" className="player-username" placeholder="Enter your username" onChange={dataCollector.bind(this)}/>
+                        <input name="username" type="text" className="player-username" autoComplete="off" placeholder="Enter your username" onChange={dataCollector.bind(this)}/>
                         <button type="submit" className={!message ? "btn btn--primary btn--inside uppercase" : "btn btn--primary btn--inside uppercase btn-error"}>Confirm</button>
                         <Fade bottom collapse when={error}>
                             {error && <label className="form-error" htmlFor="username">{message}</label>}
