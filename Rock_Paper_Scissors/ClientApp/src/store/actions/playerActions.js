@@ -1,6 +1,6 @@
 import player from '../../api/PlayerAPI';
 import { errorAction, successAction } from './ajaxActions';
-import { LOGGED_IN_PLAYER } from './actionTypes';
+import { LOGIN_PLAYER, LOGOUT_PLAYER } from './actionTypes';
 
 export function registerPlayerAction(payload) {
     return function(dispatch) {
@@ -8,7 +8,7 @@ export function registerPlayerAction(payload) {
             .then(response => {
                 localStorage.setItem('username', response.data.username);
                 dispatch(successAction());
-                dispatch(loggedInPlayerAction());
+                dispatch(loginPlayerAction());
             })
             .catch(error => {
                 const message = error.response.data.message;
@@ -18,8 +18,16 @@ export function registerPlayerAction(payload) {
     }
 }
 
-export function loggedInPlayerAction() {
+export function loginPlayerAction() {
     return {
-        type: LOGGED_IN_PLAYER
+        type: LOGIN_PLAYER
+    };
+}
+
+export function logoutPlayerAction() {
+    localStorage.clear();
+
+    return {
+        type: LOGOUT_PLAYER
     };
 }
