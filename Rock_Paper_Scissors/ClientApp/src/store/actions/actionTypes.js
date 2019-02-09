@@ -5,4 +5,5 @@ export const AJAX_SUCCESS = 'AJAX_SUCCESS';
 
 // Player Action Types
 export const REGISTER_PLAYER = 'REGISTER_PLAYER';
-export const LOGGED_IN_PLAYER = 'LOGGED_IN_PLAYER';
+export const LOGIN_PLAYER = 'LOGIN_PLAYER';
+export const LOGOUT_PLAYER = 'LOGOUT_PLAYER';
