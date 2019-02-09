@@ -7,6 +7,7 @@ import Header from './components/common/Header';
 // FontAwesome Icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHandRock, faHandPaper, faHandPeace, faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
+import Main from './components/common/Main';
 
 library.add(faHandRock);
 library.add(faHandPaper);
@@ -23,9 +24,7 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                <main>
-
-                </main>
+                <Main />
                 <footer>
 
                 </footer>
