@@ -1,6 +1,8 @@
 ﻿namespace Rock_Paper_Scissors.Controllers
 {
+    using System.Linq;
     using BindingModels;
+    using Entities;
     using Filters;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,16 @@
             {
                 message = "Username already exists."
             });
+        }
+
+        [HttpPost("all")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult All()
+        {
+            IQueryable<Player> playersOrderedByScore = _playerService.AllOrderByWins;
+
+            return Ok(playersOrderedByScore);
         }
     }
 }
