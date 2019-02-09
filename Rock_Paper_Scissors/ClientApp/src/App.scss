@@ -112,3 +112,48 @@ $error: #df0000;
     }
   }
 }
+
+main {
+  margin-top: 20px;
+
+  .versus-text {
+    text-align: center;
+    font-size: 15em;
+    color: #838383;
+  }
+
+  .rock-paper-scissors {
+    display: flex;
+    margin-top: 40px;
+    padding: 50px 400px;
+    font-size: 15em;
+    justify-content: space-evenly;
+
+    .rock {
+      cursor: pointer;
+      transition: all 200ms ease-in;
+
+      &:hover {
+        color: #ae1600;
+      }
+    }
+
+    .paper {
+      cursor: pointer;
+      transition: all 200ms ease-in;
+
+      &:hover {
+        color: #efbe00;
+      }
+    }
+
+    .scissors {
+      cursor: pointer;
+      transition: all 200ms ease-in;
+
+      &:hover {
+        color: #bc00ef;
+      }
+    }
+  }
+}
