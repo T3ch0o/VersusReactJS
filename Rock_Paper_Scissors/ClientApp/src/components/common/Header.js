@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import logo from '../../assets/images/logo.svg';
 import dataCollector from '../../utils/dataCollector';
-import { registerPlayerAction } from '../../store/actions/playerActions';
+import { logoutPlayerAction, registerPlayerAction } from '../../store/actions/playerActions';
 import { connect } from 'react-redux';
+import Fade from 'react-reveal/Fade'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Header extends Component {
     constructor() {
@@ -13,12 +16,17 @@ class Header extends Component {
         };
 
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
+        this.showForm = this.showForm.bind(this);
     }
 
     onSubmitHandler(event) {
         event.preventDefault();
 
-        this.props.register({username: this.state.username});
+        this.props.register({ username: this.state.username });
+    }
+
+    showForm() {
+        this.props.logout();
     }
 
     render() {
@@ -29,11 +37,19 @@ class Header extends Component {
                 <div className="logo">
                     <img src={logo} alt="" />
                 </div>
-                {!loggedIn && <form className="player-form" onSubmit={this.onSubmitHandler}>
-                    <input name="username" type="text" className="player-username" placeholder="Enter your username" onChange={dataCollector.bind(this)}/>
-                    <button type="submit" className={!message ? "btn btn--primary btn--inside uppercase" : "btn btn--primary btn--inside uppercase btn-error"}>Confirm</button>
-                    {error && <label className="form-error" htmlFor="username">{message}</label>}
-                </form>}
+
+                <Fade top when={!loggedIn}>
+                    {!loggedIn && <form className="player-form" onSubmit={this.onSubmitHandler}>
+                        <input name="username" type="text" className="player-username" placeholder="Enter your username" onChange={dataCollector.bind(this)}/>
+                        <button type="submit" className={!message ? "btn btn--primary btn--inside uppercase" : "btn btn--primary btn--inside uppercase btn-error"}>Confirm</button>
+                        <Fade bottom collapse when={error}>
+                            {error && <label className="form-error" htmlFor="username">{message}</label>}
+                        </Fade>
+                    </form>}
+                </Fade>
+                <Fade delay={1000}>
+                    {loggedIn && <button type="button" className="btn-show" onClick={this.showForm}><FontAwesomeIcon icon="user-alt-slash"/></button>}
+                </Fade>
             </header>
         );
     }
@@ -50,7 +66,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        register: (payload) => dispatch(registerPlayerAction(payload))
+        register: (payload) => dispatch(registerPlayerAction(payload)),
+        logout: () => dispatch(logoutPlayerAction())
     }
 }
 
