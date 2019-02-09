@@ -14,6 +14,8 @@
             _db = db;
         }
 
+        public IQueryable<Player> AllOrderByWins => _db.Players.OrderBy(player => player.Wins);
+
         public bool RegisterPlayer(string username, string ipAddress)
         {
             Player player = _db.Players.FirstOrDefault(p => p.Username == username);
