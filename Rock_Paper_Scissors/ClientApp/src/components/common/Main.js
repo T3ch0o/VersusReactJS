@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Fade from 'react-reveal/Fade';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getReactStatusAction } from '../../store/actions/reactActions';
 
 class Main extends Component {
     constructor() {
@@ -12,7 +13,12 @@ class Main extends Component {
     }
 
     onClickHandler(handSign) {
+        const payload = {
+            username: localStorage.getItem('username'),
+            handSign
+        };
 
+        this.props.getReactStatus(payload);
     }
 
     render() {
@@ -27,13 +33,13 @@ class Main extends Component {
 
                     <Fade left delay={1500}>
                         <div className="rock-paper-scissors">
-                            <div className="rock" onClick={() => this.onClickHandler('rock')}>
+                            <div className="rock" onClick={() => this.onClickHandler('Rock')}>
                                 <FontAwesomeIcon icon="hand-rock"/>
                             </div>
-                            <div className="paper" onClick={() => this.onClickHandler('scissor')}>
+                            <div className="paper" onClick={() => this.onClickHandler('Paper')}>
                                 <FontAwesomeIcon icon="hand-paper"/>
                             </div>
-                            <div className="scissors" onClick={() => this.onClickHandler('paper')}>
+                            <div className="scissors" onClick={() => this.onClickHandler('Scissors')}>
                                 <FontAwesomeIcon icon="hand-peace"/>
                             </div>
                         </div>
@@ -50,5 +56,11 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Main);
+function mapDispatchToProps(dispatch) {
+    return {
+        getReactStatus: (payload) => dispatch(getReactStatusAction(payload))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
