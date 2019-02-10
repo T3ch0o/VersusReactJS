@@ -43,8 +43,8 @@
 
                     return Ok(new
                     {
-                        status,
-                        reactHandSign = handSigns[reactValue]
+                        status = "Loss",
+                        handSign = handSigns[reactValue]
                     });
                 }
 
@@ -55,8 +55,8 @@
 
                     return Ok(new
                     {
-                        status,
-                        reactHandSign = handSigns[reactValue]
+                        status = "Win",
+                        handSign = handSigns[reactValue]
                     });
                 }
 
@@ -66,7 +66,7 @@
                 return Ok(new
                 {
                     status,
-                    reactHandSign = handSigns[reactValue]
+                    handSign = handSigns[reactValue]
                 });
             }
 
