@@ -10,7 +10,7 @@
 
         public int Losses { get; set; }
 
-        public int Ties { get; set; }
+        public int Draws { get; set; }
 
         public string IpAddress { get; set; }
     }
