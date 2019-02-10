@@ -17,7 +17,7 @@
             _playerService = playerService;
         }
 
-        [HttpGet("hand_sign")]
+        [HttpPost("hand_sign")]
         [ValidateModelState]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
