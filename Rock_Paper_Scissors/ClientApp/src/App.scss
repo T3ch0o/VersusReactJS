@@ -16,14 +16,52 @@ $error: #df0000;
   align-items: center;
   justify-items: center;
 
-  .logo > img {
-    width: 400px;
-    margin-bottom: 20px;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    z-index: 1;
-    transform: translate(-50%);
+  .bubble {
+    width: 300px;
+    margin: 50px auto;
+    border-radius: 15px;
+    background: $button-bg-color;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+
+    &:before {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-left: 15px solid transparent;
+      border-right: 15px solid $button-bg-color;
+      border-top: 15px solid $button-bg-color;
+      border-bottom: 15px solid transparent;
+      left: -16px;
+      top: 0;
+    }
+  }
+
+  .logo {
+    position: relative;
+
+    img {
+      width: 400px;
+      margin-bottom: 20px;
+      position: absolute;
+      left: 50%;
+      top: -160px;
+      z-index: 1;
+      transform: translateX(-50%);
+    }
+
+    .bubble {
+      position:  absolute;
+      left: 200px;
+      top: -50px;
+    }
   }
 
   .btn-show {
@@ -127,11 +165,12 @@ main {
     margin-top: 40px;
     padding: 50px 400px;
     font-size: 15em;
-    justify-content: space-evenly;
+    justify-content: center;
 
     .rock {
       cursor: pointer;
       transition: all 200ms ease-in;
+      margin-right: 100px;
 
       &:hover {
         color: #ae1600;
@@ -141,6 +180,7 @@ main {
     .paper {
       cursor: pointer;
       transition: all 200ms ease-in;
+      margin-right: 100px;
 
       &:hover {
         color: #efbe00;
@@ -157,3 +197,4 @@ main {
     }
   }
 }
+
