@@ -32,12 +32,13 @@ class Header extends Component {
     }
 
     render() {
-        const { error, loggedIn, message } = this.props;
+        const { error, loggedIn, message, replica } = this.props;
 
         return (
             <header className="intro">
                 <div className="logo">
                     <img src={logo} alt="" />
+                    {loggedIn && <Fade delay={500}><div className="bubble">{replica}</div></Fade>}
                 </div>
 
                 <Fade top when={!loggedIn}>
@@ -62,7 +63,8 @@ function mapStateToProps(state) {
     return {
         error: state.ajax.error,
         message: state.ajax.message,
-        loggedIn: state.player.loggedIn
+        loggedIn: state.player.loggedIn,
+        replica: state.react.replica
     };
 }
 
