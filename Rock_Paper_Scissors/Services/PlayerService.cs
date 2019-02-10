@@ -56,5 +56,25 @@
 
             return false;
         }
+
+        public void ChangePlayerStatus(string username, string status)
+        {
+            Player currentPlayer = _db.Players.FirstOrDefault(player => player.Username == username);
+
+            if (status == "Win")
+            {
+                currentPlayer.Wins++;
+            }
+            else if (status == "Loss")
+            {
+                currentPlayer.Losses++;
+            }
+            else
+            {
+                currentPlayer.Draws++;
+            }
+
+            _db.SaveChanges();
+        }
     }
 }
