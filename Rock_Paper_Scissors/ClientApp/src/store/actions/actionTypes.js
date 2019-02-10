@@ -8,4 +8,4 @@ export const LOGIN_PLAYER = 'LOGIN_PLAYER';
 export const LOGOUT_PLAYER = 'LOGOUT_PLAYER';
 
 // React Action Types
-export const GET_REACT_MESSAGE = 'GET_REACT_MESSAGE';
+export const GET_REACT_REPLICA = 'GET_REACT_REPLICA';
