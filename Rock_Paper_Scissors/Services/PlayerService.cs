@@ -16,11 +16,26 @@
 
         public IQueryable<Player> AllOrderByWins => _db.Players.OrderBy(player => player.Wins);
 
-        public bool RegisterPlayer(string username, string ipAddress)
+        public bool IsPlayerAuthorized(string username, string ipAddress)
         {
             Player player = _db.Players.FirstOrDefault(p => p.Username == username);
 
             if (player == null)
+            {
+                return false;
+            }
+
+            if (player.IpAddress == ipAddress)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool RegisterPlayer(string username, string ipAddress)
+        {
+            if (!IsPlayerAuthorized(username, ipAddress))
             {
                 Player newPlayer = new Player
                 {
@@ -34,7 +49,7 @@
                 return true;
             }
 
-            if (player.IpAddress == ipAddress)
+            if (IsPlayerAuthorized(username, ipAddress))
             {
                 return true;
             }

@@ -7,6 +7,8 @@
     {
         IQueryable<Player> AllOrderByWins { get; }
 
+        bool IsPlayerAuthorized(string username, string ipAddress);
+
         bool RegisterPlayer(string username, string ipAddress);
     }
 }
