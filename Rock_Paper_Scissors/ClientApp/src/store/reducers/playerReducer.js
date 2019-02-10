@@ -1,9 +1,7 @@
-import { LOGIN_PLAYER, LOGOUT_PLAYER, REGISTER_PLAYER } from '../actions/actionTypes';
+import { LOGIN_PLAYER, LOGOUT_PLAYER } from '../actions/actionTypes';
 
 export default function playerReducer(state = { loggedIn: false }, action) {
     switch (action.type) {
-        case REGISTER_PLAYER:
-            return Object.assign({}, state);
         case LOGIN_PLAYER:
             return Object.assign({}, state, { loggedIn: true });
         case LOGOUT_PLAYER:
