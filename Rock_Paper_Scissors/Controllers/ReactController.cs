@@ -36,7 +36,7 @@
                 int playerValue = handSigns.IndexOf(player.HandSign);
                 string status;
 
-                if ((reactValue + 1) % 3 + 1 == playerValue + 1)
+                if (((reactValue + 1) % 3) == playerValue)
                 {
                     status = "Win";
                     _playerService.ChangePlayerStatus(player.Username, status);
@@ -48,7 +48,7 @@
                     });
                 }
 
-                if ((playerValue + 1) % 3 + 1 == reactValue + 1)
+                if (((playerValue + 1) % 3) == reactValue)
                 {
                     status = "Loss";
                     _playerService.ChangePlayerStatus(player.Username, status);
