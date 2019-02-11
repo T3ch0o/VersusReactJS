@@ -11,12 +11,12 @@
 
             string handSign = (string)value;
 
-            if (!handSigns.Contains(handSign))
+            if (handSigns.Contains(handSign))
             {
-                return new ValidationResult("Are you trying to cheat?");
+                return ValidationResult.Success;
             }
 
-            return ValidationResult.Success;
+            return new ValidationResult("Are you trying to cheat?");
         }
     }
 }
