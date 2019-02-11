@@ -7,6 +7,9 @@ const player = {
                'Content-Type': 'application/json'
            }
         });
+    },
+    getAllPlayersStatus: function() {
+        return axios.get('api/player/all');
     }
 };
 
