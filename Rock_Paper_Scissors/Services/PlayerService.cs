@@ -20,17 +20,7 @@
         {
             Player player = _db.Players.FirstOrDefault(p => p.Username == username);
 
-            if (player == null)
-            {
-                return false;
-            }
-
-            if (player.IpAddress == ipAddress)
-            {
-                return true;
-            }
-
-            return false;
+            return player != null && player.IpAddress == ipAddress;
         }
 
         public bool RegisterPlayer(string username, string ipAddress)
@@ -49,12 +39,7 @@
                 return true;
             }
 
-            if (IsPlayerAuthorized(username, ipAddress))
-            {
-                return true;
-            }
-
-            return false;
+            return IsPlayerAuthorized(username, ipAddress);
         }
 
         public void ChangePlayerStatus(string username, string status)
