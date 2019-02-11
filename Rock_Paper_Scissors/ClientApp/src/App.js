@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.scss';
 
 // Components
 import Header from './components/common/Header';
+import Main from './components/common/Main';
 
 // FontAwesome Icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHandRock, faHandPaper, faHandPeace, faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
-import Main from './components/common/Main';
 
 library.add(faHandRock);
 library.add(faHandPaper);
@@ -21,10 +22,12 @@ class App extends Component {
     }
 
     render() {
+        const loggedIn = this.props.loggedIn;
+
         return (
             <div>
                 <Header />
-                <Main />
+                {loggedIn && <Main />}
                 <footer>
 
                 </footer>
@@ -33,4 +36,10 @@ class App extends Component {
     }
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        loggedIn: state.player.loggedIn
+    }
+}
+
+export default connect(mapStateToProps)(App);
