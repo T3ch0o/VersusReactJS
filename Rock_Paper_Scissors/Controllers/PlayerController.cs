@@ -1,5 +1,7 @@
 ﻿namespace Rock_Paper_Scissors.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using BindingModels;
     using Entities;
@@ -38,14 +40,28 @@
             });
         }
 
-        [HttpPost("all")]
+        [HttpGet("all")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult All()
         {
-            IQueryable<Player> playersOrderedByScore = _playerService.AllOrderByWins;
+            IQueryable<Player> playersOrderedByWins = _playerService.AllOrderByWins;
+            List<PlayerStatusBindingModel> players = new List<PlayerStatusBindingModel>();
 
-            return Ok(playersOrderedByScore);
+            foreach (Player player in playersOrderedByWins)
+            {
+                string winRate = $"{(double) player.Wins / (player.Wins + player.Losses) * 100:F2}%";
+
+                players.Add(new PlayerStatusBindingModel
+                {
+                    Username = player.Username,
+                    Wins = player.Wins,
+                    Losses = player.Losses,
+                    WinRate = winRate
+                });
+            }
+
+            return Ok(players);
         }
     }
 }
